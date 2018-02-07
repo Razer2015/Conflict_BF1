@@ -1,4 +1,5 @@
 ﻿using AForge.Video;
+using Conflict_BF1.Models;
 using FireAnt.Windows.Forms.Util;
 using MorseCodeDecoder;
 using System;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,14 @@ namespace Conflict_BF1
     {
         public ScreenCapturer() {
             InitializeComponent();
+
+            CheckInformation();
+
+            SandBagIndexes.IndexesRefreshed += SandBagIndexes_IndexesRefreshed;
+        }
+
+        private void SandBagIndexes_IndexesRefreshed() {
+            Console.WriteLine($"Current index = {_currentIndex}");
         }
 
         private float X = 0;
@@ -35,45 +45,15 @@ namespace Conflict_BF1
         ScreenCaptureStream ScreenStream = null;
         public delegate void Processing(ref Bitmap image);
         bool _capturing = false;
-
-        private void btn_screenshot_Click(object sender, EventArgs e) {
-            if (pBox_preview?.Image == null) {
-                return;
-            }
-            pBox_preview.Image.Save($"Screenshot_{DateTime.Now.ToFileTime()}.png", ImageFormat.Png);
-        }
+        int _currentIndex = 0;
+        string[] _stages = new string[] { "First", "Second", "Third", "Fourth", "Finished" };
 
         /// <summary>
-        /// The crosshair which points to the point where the morse is taken from
+        /// The overlay image
         /// </summary>
         /// <param name="image"></param>
         private void DrawLine(ref Bitmap image) {
             Drawer.DrawOverlay(ref image, X, Y, TopWidth, BottomWidth, Height);
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            if (_capturing) {
-                closeScreenSource();
-                return;
-            }
-
-            processes += DrawLine;
-
-            Rectangle screenArea = Rectangle.Empty;
-            ScreenCapStart sc = new ScreenCapStart(false);
-            if (sc.ShowDialog() == DialogResult.OK) {
-                screenArea = sc.toreturn;
-
-                // create screen capture video source
-                ScreenStream = new ScreenCaptureStream(screenArea, 60);
-                // set NewFrame event handler
-                ScreenStream.NewFrame += new NewFrameEventHandler(Screen_NewFrame);
-                // start the video source
-                ScreenStream.Start();
-                pBox_preview.SizeMode = PictureBoxSizeMode.StretchImage;
-                button1.Text = "Stop Capturing";
-                _capturing = true;
-            }
         }
 
         #region Screen
@@ -97,12 +77,45 @@ namespace Conflict_BF1
                     ScreenStream.SignalToStop();
                     ScreenStream = null;
                     processes = null;
-                    button1.Text = "Start Capturing";
+                    captureStart.Text = "Start Capturing";
                     _capturing = false;
                 }
             }
         }
         #endregion
+
+        #region Events
+        private void captureStart_Click(object sender, EventArgs e) {
+            if (_capturing) {
+                closeScreenSource();
+                return;
+            }
+
+            processes += DrawLine;
+
+            Rectangle screenArea = Rectangle.Empty;
+            ScreenCapStart sc = new ScreenCapStart(false);
+            if (sc.ShowDialog() == DialogResult.OK) {
+                screenArea = sc.toreturn;
+
+                // create screen capture video source
+                ScreenStream = new ScreenCaptureStream(screenArea, 60);
+                // set NewFrame event handler
+                ScreenStream.NewFrame += new NewFrameEventHandler(Screen_NewFrame);
+                // start the video source
+                ScreenStream.Start();
+                pBox_preview.SizeMode = PictureBoxSizeMode.StretchImage;
+                captureStart.Text = "Stop Capturing";
+                _capturing = true;
+            }
+        }
+
+        private void btn_screenshot_Click(object sender, EventArgs e) {
+            if (pBox_preview?.Image == null) {
+                return;
+            }
+            pBox_preview.Image.Save($"Screenshot_{DateTime.Now.ToFileTime()}.png", ImageFormat.Png);
+        }
 
         private void ScreenCapturer_FormClosed(object sender, FormClosedEventArgs e) {
             closeScreenSource();
@@ -149,6 +162,100 @@ namespace Conflict_BF1
             * 
             */
             this.uxHotKey.RegisterHotkey(Modifiers.Control, Keys.F9);
+        }
+
+        private void layoutPanel_CellPaint(object sender, TableLayoutCellPaintEventArgs e) {
+            var panel = sender as TableLayoutPanel;
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+            var rectangle = e.CellBounds;
+            using (var pen = new Pen(Color.Black, 2)) {
+                pen.Alignment = PenAlignment.Center;
+                pen.DashStyle = DashStyle.Solid;
+
+                if (e.Row == (panel.RowCount - 1)) {
+                    rectangle.Height -= 1;
+                }
+
+                if (e.Column == (panel.ColumnCount - 1)) {
+                    rectangle.Width -= 1;
+                }
+
+                e.Graphics.DrawRectangle(pen, rectangle);
+            }
+        }
+
+        private void previousBtn_Click(object sender, EventArgs e) {
+            CheckButtons(false);
+            _currentIndex -= 1;
+            CheckButtons(true);
+            CheckInformation();
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e) {
+            CheckButtons(false);
+            _currentIndex += 1;
+            CheckButtons(true);
+            CheckInformation();
+        }
+        #endregion
+
+        private void CheckInformation() {
+            // Enable/Disable buttons
+            previousBtn.Enabled = (_currentIndex <= 0) ? false : true;
+            nextBtn.Enabled = (_currentIndex >= 4) ? false : true;
+            layoutPanel_red.Visible = (_currentIndex >= 4) ? false : true;
+            layoutPanel_orange.Visible = (_currentIndex >= 4) ? false : true;
+            layoutPanel_yellow.Visible = (_currentIndex >= 4) ? false : true;
+            layoutPanel_green.Visible = (_currentIndex >= 4) ? false : true;
+
+            // Set correct title
+            stage.Text = _stages[_currentIndex];
+        }
+
+        private void CheckButtons(bool set) {
+            if (_currentIndex <= 3) {
+                foreach (var pb in this.layoutPanel_red.Controls.OfType<CheckBox>()) {
+                    var index = int.Parse(pb.Text.Substring(1)) - 1;
+                    if (!set) {
+                        SandBagIndexes.Indexes[_currentIndex].Red[index] = pb.Checked;
+                    }
+                    else {
+                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Red[index];
+                    }
+                }
+                foreach (var pb in this.layoutPanel_orange.Controls.OfType<CheckBox>()) {
+                    var index = int.Parse(pb.Text.Substring(1)) - 1;
+                    if (!set) {
+                        SandBagIndexes.Indexes[_currentIndex].Orange[index] = pb.Checked;
+                    }
+                    else {
+                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Orange[index];
+                    }
+                }
+                foreach (var pb in this.layoutPanel_yellow.Controls.OfType<CheckBox>()) {
+                    var index = int.Parse(pb.Text.Substring(1)) - 1;
+                    if (!set) {
+                        SandBagIndexes.Indexes[_currentIndex].Yellow[index] = pb.Checked;
+                    }
+                    else {
+                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Yellow[index];
+                    }
+                }
+                foreach (var pb in this.layoutPanel_green.Controls.OfType<CheckBox>()) {
+                    var index = int.Parse(pb.Text.Substring(1)) - 1;
+                    if (!set) {
+                        SandBagIndexes.Indexes[_currentIndex].Green[index] = pb.Checked;
+                    }
+                    else {
+                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Green[index];
+                    }
+                }
+            }
+
+            // Call the refreshed event
+            if (!set) {
+                SandBagIndexes.RefreshIndexes();
+            }
         }
     }
 }
