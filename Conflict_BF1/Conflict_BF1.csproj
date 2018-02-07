@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,14 +55,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drawer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HotkeyLib\Enums.cs" />
+    <Compile Include="HotkeyLib\HotKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HotkeyLib\HotKey.Designer.cs">
+      <DependentUpon>HotKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotkeyLib\ModifierKeysEditor.cs" />
+    <Compile Include="HotkeyLib\ModifierKeysEditorUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HotkeyLib\ModifierKeysEditorUI.Designer.cs">
+      <DependentUpon>ModifierKeysEditorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotkeyLib\NativeMethods.cs" />
+    <Compile Include="Process_Location.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenCapStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScreenCapStart.Designer.cs">
+      <DependentUpon>ScreenCapStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenCapturer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScreenCapturer.Designer.cs">
+      <DependentUpon>ScreenCapturer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uBitmap.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotkeyLib\ModifierKeysEditorUI.resx">
+      <DependentUpon>ModifierKeysEditorUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +108,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ScreenCapStart.resx">
+      <DependentUpon>ScreenCapStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreenCapturer.resx">
+      <DependentUpon>ScreenCapturer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -74,6 +127,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HotkeyLib\HotkeyLib.csproj" />
+    <Content Include="HotkeyLib\ToolboxImage.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
