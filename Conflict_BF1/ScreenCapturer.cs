@@ -19,12 +19,22 @@ namespace Conflict_BF1
 {
     public partial class ScreenCapturer : Form
     {
+        Results results;
+
         public ScreenCapturer() {
             InitializeComponent();
 
             CheckInformation();
 
-            SandBagIndexes.IndexesRefreshed += SandBagIndexes_IndexesRefreshed;
+            //SandBagIndexes.IndexesRefreshed += SandBagIndexes_IndexesRefreshed;
+        }
+
+        private void ShowResults() {
+            if (results == null || results.IsDisposed) {
+                results = new Results();
+            }
+
+            results.Show();
         }
 
         private void SandBagIndexes_IndexesRefreshed() {
@@ -85,6 +95,10 @@ namespace Conflict_BF1
         #endregion
 
         #region Events
+        private void btn_results_Click(object sender, EventArgs e) {
+            ShowResults();
+        }
+
         private void captureStart_Click(object sender, EventArgs e) {
             if (_capturing) {
                 closeScreenSource();
@@ -217,37 +231,45 @@ namespace Conflict_BF1
                 foreach (var pb in this.layoutPanel_red.Controls.OfType<CheckBox>()) {
                     var index = int.Parse(pb.Text.Substring(1)) - 1;
                     if (!set) {
-                        SandBagIndexes.Indexes[_currentIndex].Red[index] = pb.Checked;
+                        //SandBagIndexes.Indexes[_currentIndex].Red[index] = pb.Checked;
+                        SandBagIndexes.SetIndex(0, index, _currentIndex, pb.Checked);
                     }
                     else {
-                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Red[index];
+                        //pb.Checked = SandBagIndexes.Indexes[_currentIndex].Red[index];
+                        pb.Checked = SandBagIndexes.GetIndex(0, index, _currentIndex);
                     }
                 }
                 foreach (var pb in this.layoutPanel_orange.Controls.OfType<CheckBox>()) {
                     var index = int.Parse(pb.Text.Substring(1)) - 1;
                     if (!set) {
-                        SandBagIndexes.Indexes[_currentIndex].Orange[index] = pb.Checked;
+                        //SandBagIndexes.Indexes[_currentIndex].Orange[index] = pb.Checked;
+                        SandBagIndexes.SetIndex(1, index, _currentIndex, pb.Checked);
                     }
                     else {
-                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Orange[index];
+                        //pb.Checked = SandBagIndexes.Indexes[_currentIndex].Orange[index];
+                        pb.Checked = SandBagIndexes.GetIndex(1, index, _currentIndex);
                     }
                 }
                 foreach (var pb in this.layoutPanel_yellow.Controls.OfType<CheckBox>()) {
                     var index = int.Parse(pb.Text.Substring(1)) - 1;
                     if (!set) {
-                        SandBagIndexes.Indexes[_currentIndex].Yellow[index] = pb.Checked;
+                        //SandBagIndexes.Indexes[_currentIndex].Yellow[index] = pb.Checked;
+                        SandBagIndexes.SetIndex(2, index, _currentIndex, pb.Checked);
                     }
                     else {
-                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Yellow[index];
+                        //pb.Checked = SandBagIndexes.Indexes[_currentIndex].Yellow[index];
+                        pb.Checked = SandBagIndexes.GetIndex(2, index, _currentIndex);
                     }
                 }
                 foreach (var pb in this.layoutPanel_green.Controls.OfType<CheckBox>()) {
                     var index = int.Parse(pb.Text.Substring(1)) - 1;
                     if (!set) {
-                        SandBagIndexes.Indexes[_currentIndex].Green[index] = pb.Checked;
+                        //SandBagIndexes.Indexes[_currentIndex].Green[index] = pb.Checked;
+                        SandBagIndexes.SetIndex(3, index, _currentIndex, pb.Checked);
                     }
                     else {
-                        pb.Checked = SandBagIndexes.Indexes[_currentIndex].Green[index];
+                        //pb.Checked = SandBagIndexes.Indexes[_currentIndex].Green[index];
+                        pb.Checked = SandBagIndexes.GetIndex(3, index, _currentIndex);
                     }
                 }
             }

@@ -10,20 +10,76 @@ namespace Conflict_BF1.Models
 
     public static class SandBagIndexes
     {
-        public static event IndexesSet IndexesRefreshed;
+        public static event IndexesSet Refreshed;
 
-        public static IndexList[] Indexes { get; set; }
+        //public static IndexList[] Indexes { get; set; }
+        public static bool[,] Indexes { get; set; }
+        private static int[][] Matrix = new[]
+        {
+            new int[] { 0, 1, 2, 3, 4, 5, 6, 7 },
+            new int[] { 1, 2, 3, 4, 5, 6 },
+            new int[] { 2, 3, 4, 5 },
+            new int[] { 3, 4 }
+        };
 
         static SandBagIndexes() {
-            Indexes = new IndexList[4];
-            Indexes[0] = new IndexList();      // Red
-            Indexes[1] = new IndexList();      // Orange
-            Indexes[2] = new IndexList();      // Yellow
-            Indexes[3] = new IndexList();      // Green
+            Indexes = new bool[8,8];
+
+            //var x = Matrix[0][1];
+
+            //Indexes = new IndexList[4];
+            //Indexes[0] = new IndexList();      // First
+            //Indexes[1] = new IndexList();      // Second
+            //Indexes[2] = new IndexList();      // Third
+            //Indexes[3] = new IndexList();      // Fourth
         }
 
         public static void RefreshIndexes() {
-            IndexesRefreshed?.Invoke();
+            Refreshed?.Invoke();
+        }
+
+        public static bool GetIndex(int row, int column) {
+            if (row < 0 || column < 0) {
+                return false;
+            }
+            return Indexes[row, column];
+        }
+
+        public static bool GetIndex(int row, int column, int side) {
+            int _row = 0;
+            int _column = 0;
+            if (side.Equals(0)) {
+                _row = row;
+                _column = Matrix[row][column];
+            }
+            else if (side.Equals(1)) {
+                _row = Matrix[row][column];
+                _column = 7 - row;
+            }
+            else if (side.Equals(2)) {
+                _row = 7 - row;
+                _column = Matrix[row][Matrix[row].Length - (column + 1)];
+            }
+            else if (side.Equals(3)) {
+                _row = Matrix[row][Matrix[row].Length - (column + 1)];
+                _column = row;
+            }
+            return Indexes[_row, _column];
+        }
+
+        public static void SetIndex(int row, int column, int side, bool value) {
+            if (side.Equals(0)) {
+                Indexes[row, Matrix[row][column]] = value;
+            }
+            else if (side.Equals(1)) {
+                Indexes[Matrix[row][column], 7 - row] = value;
+            }
+            else if (side.Equals(2)) {
+                Indexes[7 - row, Matrix[row][Matrix[row].Length - (column + 1)]] = value;
+            }
+            else if (side.Equals(3)) {
+                Indexes[Matrix[row][Matrix[row].Length - (column + 1)], row] = value;
+            }
         }
     }
 
