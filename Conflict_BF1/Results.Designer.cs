@@ -52,6 +52,8 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,7 +68,7 @@
             this.layoutPanel_tileLights.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.layoutPanel_tileLights.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.layoutPanel_tileLights.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.layoutPanel_tileLights.Location = new System.Drawing.Point(12, 12);
+            this.layoutPanel_tileLights.Location = new System.Drawing.Point(12, 25);
             this.layoutPanel_tileLights.Name = "layoutPanel_tileLights";
             this.layoutPanel_tileLights.RowCount = 8;
             this.layoutPanel_tileLights.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -96,7 +98,7 @@
             this.C6,
             this.C7,
             this.C8});
-            this.dataGridView1.Location = new System.Drawing.Point(452, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(452, 25);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 50;
@@ -277,7 +279,7 @@
             // button9
             // 
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(379, 335);
+            this.button9.Location = new System.Drawing.Point(379, 353);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(52, 23);
             this.button9.TabIndex = 13;
@@ -289,7 +291,7 @@
             // button10
             // 
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(449, 335);
+            this.button10.Location = new System.Drawing.Point(449, 353);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(52, 23);
             this.button10.TabIndex = 14;
@@ -301,7 +303,7 @@
             // button11
             // 
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(519, 335);
+            this.button11.Location = new System.Drawing.Point(519, 353);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(52, 23);
             this.button11.TabIndex = 15;
@@ -313,7 +315,7 @@
             // button12
             // 
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Location = new System.Drawing.Point(589, 335);
+            this.button12.Location = new System.Drawing.Point(589, 353);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(52, 23);
             this.button12.TabIndex = 16;
@@ -325,7 +327,7 @@
             // button13
             // 
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.Location = new System.Drawing.Point(659, 335);
+            this.button13.Location = new System.Drawing.Point(659, 353);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(52, 23);
             this.button13.TabIndex = 17;
@@ -337,7 +339,7 @@
             // button14
             // 
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Location = new System.Drawing.Point(729, 335);
+            this.button14.Location = new System.Drawing.Point(729, 353);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(52, 23);
             this.button14.TabIndex = 18;
@@ -349,7 +351,7 @@
             // button15
             // 
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Location = new System.Drawing.Point(799, 335);
+            this.button15.Location = new System.Drawing.Point(799, 353);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(52, 23);
             this.button15.TabIndex = 19;
@@ -361,7 +363,7 @@
             // button16
             // 
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Location = new System.Drawing.Point(869, 335);
+            this.button16.Location = new System.Drawing.Point(869, 353);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(52, 23);
             this.button16.TabIndex = 20;
@@ -370,11 +372,31 @@
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Visual Representation";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(461, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Input button combinations";
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 442);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
@@ -396,9 +418,10 @@
             this.Controls.Add(this.layoutPanel_tileLights);
             this.Name = "Results";
             this.ShowIcon = false;
-            this.Text = "Results";
+            this.Text = "Tiles";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -431,5 +454,7 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

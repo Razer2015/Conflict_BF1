@@ -62,6 +62,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
     <Compile Include="HotkeyLib\Enums.cs" />
     <Compile Include="HotkeyLib\HotKey.cs">
       <SubType>Component</SubType>
@@ -109,6 +115,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HotkeyLib\ModifierKeysEditorUI.resx">
       <DependentUpon>ModifierKeysEditorUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +129,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Results.resx">
       <DependentUpon>Results.cs</DependentUpon>
@@ -147,6 +157,13 @@
   <ItemGroup>
     <Content Include="HotkeyLib\HotkeyLib.csproj" />
     <Content Include="HotkeyLib\ToolboxImage.bmp" />
+    <None Include="Resources\ChateauTopView.jpg" />
+    <None Include="Resources\BF1_sbags_3.jpg" />
+    <None Include="Resources\BF1_sbags_2.jpg" />
+    <None Include="Resources\BF1_sbags_4.jpg" />
+    <None Include="Resources\BF1_sbags_1.jpg" />
+    <None Include="Resources\BF1_tiles.jpg" />
+    <None Include="Resources\BF1_sandbags.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

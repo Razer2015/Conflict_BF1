@@ -29,6 +29,7 @@
             this.captureStart = new System.Windows.Forms.Button();
             this.pBox_preview = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_help = new System.Windows.Forms.Button();
             this.btn_results = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.nUD_bWidth = new System.Windows.Forms.NumericUpDown();
@@ -107,6 +108,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_help);
             this.groupBox1.Controls.Add(this.btn_results);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.nUD_bWidth);
@@ -128,11 +130,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
+            // btn_help
+            // 
+            this.btn_help.Location = new System.Drawing.Point(748, 19);
+            this.btn_help.Name = "btn_help";
+            this.btn_help.Size = new System.Drawing.Size(100, 55);
+            this.btn_help.TabIndex = 13;
+            this.btn_help.Text = "How to?";
+            this.btn_help.UseVisualStyleBackColor = true;
+            this.btn_help.Click += new System.EventHandler(this.btn_help_Click);
+            // 
             // btn_results
             // 
-            this.btn_results.Location = new System.Drawing.Point(758, 19);
+            this.btn_results.Location = new System.Drawing.Point(574, 48);
             this.btn_results.Name = "btn_results";
-            this.btn_results.Size = new System.Drawing.Size(96, 47);
+            this.btn_results.Size = new System.Drawing.Size(161, 26);
             this.btn_results.TabIndex = 12;
             this.btn_results.Text = "Show Tiles";
             this.btn_results.UseVisualStyleBackColor = true;
@@ -853,5 +865,6 @@
         private System.Windows.Forms.Button nextBtn;
         private System.Windows.Forms.Button previousBtn;
         private System.Windows.Forms.Button btn_results;
+        private System.Windows.Forms.Button btn_help;
     }
 }

@@ -38,6 +38,21 @@ namespace Conflict_BF1.Models
             Refreshed?.Invoke();
         }
 
+        public static int SandBagCount() {
+            int result = 0;
+            // Get all bounds before looping.
+            int bound0 = Indexes.GetUpperBound(0);
+            int bound1 = Indexes.GetUpperBound(1);
+            // ... Loop over bounds.
+            for (int i = 0; i <= bound0; i++) {
+                for (int x = 0; x <= bound1; x++) {
+                    // Display the element at these indexes.
+                    result += Indexes[i, x] ? 1 : 0;
+                }
+            }
+            return result;
+        }
+
         public static bool GetIndex(int row, int column) {
             if (row < 0 || column < 0) {
                 return false;

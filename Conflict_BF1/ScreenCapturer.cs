@@ -20,6 +20,7 @@ namespace Conflict_BF1
     public partial class ScreenCapturer : Form
     {
         Results results;
+        Help help;
 
         public ScreenCapturer() {
             InitializeComponent();
@@ -35,6 +36,14 @@ namespace Conflict_BF1
             }
 
             results.Show();
+        }
+
+        private void ShowHelp() {
+            if (help == null || help.IsDisposed) {
+                help = new Help();
+            }
+
+            help.Show();
         }
 
         private void SandBagIndexes_IndexesRefreshed() {
@@ -95,6 +104,10 @@ namespace Conflict_BF1
         #endregion
 
         #region Events
+        private void btn_help_Click(object sender, EventArgs e) {
+            ShowHelp();
+        }
+
         private void btn_results_Click(object sender, EventArgs e) {
             ShowResults();
         }
@@ -277,6 +290,15 @@ namespace Conflict_BF1
             // Call the refreshed event
             if (!set) {
                 SandBagIndexes.RefreshIndexes();
+            }
+            else {
+                var sandBags = SandBagIndexes.SandBagCount();
+                if (sandBags > 12) {
+                    MessageBox.Show("You seem to have more than 12 sandbags chosen even though you should have only 12.", "Warning: Too many sandbags chosen.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (sandBags < 12 && _currentIndex == 4) {
+                    MessageBox.Show("You seem to have less than 12 sandbags chosen even though you should have 12.", "Warning: Too few sandbags chosen.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
     }
