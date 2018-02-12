@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,9 @@ namespace Conflict_BF1
 
         public ScreenCapturer() {
             InitializeComponent();
+
+            string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.Text += $" (v{assemblyVersion})";
 
             CheckInformation();
 

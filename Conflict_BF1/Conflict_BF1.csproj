@@ -157,6 +157,7 @@
   <ItemGroup>
     <Content Include="HotkeyLib\HotkeyLib.csproj" />
     <Content Include="HotkeyLib\ToolboxImage.bmp" />
+    <None Include="Resources\conflict.png" />
     <None Include="Resources\ChateauTopView.jpg" />
     <None Include="Resources\BF1_sbags_3.jpg" />
     <None Include="Resources\BF1_sbags_2.jpg" />

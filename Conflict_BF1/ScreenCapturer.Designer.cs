@@ -26,8 +26,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenCapturer));
             this.captureStart = new System.Windows.Forms.Button();
-            this.pBox_preview = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_help = new System.Windows.Forms.Button();
             this.btn_results = new System.Windows.Forms.Button();
@@ -72,7 +72,7 @@
             this.nextBtn = new System.Windows.Forms.Button();
             this.previousBtn = new System.Windows.Forms.Button();
             this.uxHotKey = new FireAnt.Windows.Forms.Util.HotKey(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_preview)).BeginInit();
+            this.pBox_preview = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_bWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_tWidth)).BeginInit();
@@ -85,6 +85,7 @@
             this.layoutPanel_orange.SuspendLayout();
             this.layoutPanel_red.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_preview)).BeginInit();
             this.SuspendLayout();
             // 
             // captureStart
@@ -96,15 +97,6 @@
             this.captureStart.Text = "Start Capture";
             this.captureStart.UseVisualStyleBackColor = true;
             this.captureStart.Click += new System.EventHandler(this.captureStart_Click);
-            // 
-            // pBox_preview
-            // 
-            this.pBox_preview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBox_preview.Location = new System.Drawing.Point(0, 80);
-            this.pBox_preview.Name = "pBox_preview";
-            this.pBox_preview.Size = new System.Drawing.Size(860, 213);
-            this.pBox_preview.TabIndex = 1;
-            this.pBox_preview.TabStop = false;
             // 
             // groupBox1
             // 
@@ -784,6 +776,15 @@
             this.uxHotKey.Modifiers = FireAnt.Windows.Forms.Util.Modifiers.None;
             this.uxHotKey.HotKeyPressed += new System.EventHandler(this.uxHotKey_HotKeyPressed);
             // 
+            // pBox_preview
+            // 
+            this.pBox_preview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBox_preview.Location = new System.Drawing.Point(0, 80);
+            this.pBox_preview.Name = "pBox_preview";
+            this.pBox_preview.Size = new System.Drawing.Size(860, 213);
+            this.pBox_preview.TabIndex = 1;
+            this.pBox_preview.TabStop = false;
+            // 
             // ScreenCapturer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -792,11 +793,11 @@
             this.Controls.Add(this.pBox_preview);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScreenCapturer";
-            this.Text = "ScreenCapturer";
+            this.Text = "BF1 - Conflict Helper";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ScreenCapturer_FormClosed);
             this.Load += new System.EventHandler(this.ScreenCapturer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_preview)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_bWidth)).EndInit();
@@ -814,6 +815,7 @@
             this.layoutPanel_red.ResumeLayout(false);
             this.layoutPanel_red.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_preview)).EndInit();
             this.ResumeLayout(false);
 
         }

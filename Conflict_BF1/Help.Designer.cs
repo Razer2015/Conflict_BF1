@@ -25,6 +25,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Help));
             this.groupBox_sbag_stairIndexes = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -313,7 +314,7 @@
             // pictureBox_tiles
             // 
             this.pictureBox_tiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox_tiles.Image = global::Conflict_BF1.Properties.Resources.ChateauTopView;
+            this.pictureBox_tiles.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_tiles.Image")));
             this.pictureBox_tiles.Location = new System.Drawing.Point(3, 16);
             this.pictureBox_tiles.Name = "pictureBox_tiles";
             this.pictureBox_tiles.Size = new System.Drawing.Size(786, 468);
@@ -341,6 +342,7 @@
             this.Controls.Add(this.panel_step2);
             this.Controls.Add(this.panel_step1);
             this.Controls.Add(this.gBox_help);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Help";
             this.Text = "Help";
             this.Load += new System.EventHandler(this.Help_Load);
